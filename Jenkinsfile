@@ -15,7 +15,7 @@ pipeline {
         stage('Packer image') {
             steps {
                 echo 'Building image through packer..'
-                sh 'packer build sample-build.json'
+                sh 'packer build al2-build.json'
 
                 
             }
