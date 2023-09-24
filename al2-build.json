@@ -1,0 +1,41 @@
+{
+
+  "variables": {
+    "region": "us-east-1",
+    "ssh_username": "ec2-user",
+    "base_ami": "ami-03a6eaae9938c858c",
+    "instance_type": "t2.micro",
+    "subnet_id": "subnet-018ce312e7eaff14c"
+  },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `region` }}",
+      "subnet_id": "{{user `subnet_id` }}",
+      "source_ami": "{{user `base_ami`}}",
+      "instance_type": "{{user `instance_type` }}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_private_key_file": "~/.ssh/id_rsa",
+      "ssh_keypair_name": "LaptopKey",
+      "ssh_timeout": "3m",
+      "ami_name": "packer-base-{{timestamp}}",
+      "associate_public_ip_address": true,
+      "tags": {
+        "Name": "Packer-Ansible"
+      },
+      "security_group_ids": ["sg-0855094c55212bca6"]
+
+    }
+
+  ],
+"provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt update ",
+        "sudo apt install nginx"
+      ]
+    }
+  ]
+}
