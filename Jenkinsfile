@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('GitClone') {
             steps {
-                sh 'rm -rf java'
+                sh 'rm -rf prometheus-agent'
                 sh 'git clone git@github.com:RadhikaBoga26/prometheus-agent.git'
                 sh 'cd /var/lib/jenkins/workspace/pipe2/prometheus-agent'
                 sh 'pwd'
